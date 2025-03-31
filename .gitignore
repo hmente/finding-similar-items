@@ -1,0 +1,8 @@
+*/.env
+.idea
+- .env
+- .idea
+- .DS_Store
+
+.kaggle
+/.env
