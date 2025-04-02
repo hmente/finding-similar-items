@@ -6,4 +6,4 @@
 
 .kaggle
 /.env
-data/books_data.csv
+data/*
