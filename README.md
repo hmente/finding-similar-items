@@ -1,67 +1,48 @@
-# 📚 Finding Similar Book Reviews using Jaccard and TF-IDF
+# 📚 Finding Similar Book Reviews using Jaccard Similarity
 
-This project was developed for the "Algorithms for Massive Data" course, part of the Master's in Data Science for Economics at the University of Milan (2024/25). The goal is to detect similar book reviews from the Amazon Books dataset using scalable similarity algorithms.
+This repository contains the code, report, and data processing workflow for the project:  
+**“Finding Similar Book Reviews using Jaccard Similarity”**  
+conducted as part of the course *Algorithms for Massive Data* in the Master in Data Science for Economics program at Università degli Studi di Milano.
 
----
+## 👩‍💻 Author
 
-## 🔍 Objective
+- Hilal Mente 
+- Academic Year 2024/25
 
-To identify semantically or lexically similar book reviews using two methods:
-- **Jaccard Similarity** (token set overlap)
-- **TF-IDF Cosine Similarity** (vectorized semantic similarity)
+## 🧠 Project Description
 
----
+This project focuses on finding lexically similar book reviews using the **Jaccard Similarity** metric on a scalable subset of the Amazon Books Review dataset.  
+Key goals:
+- EDA of review length distribution
+- Preprocess large-scale review data
+- Detect pairs of reviews with overlapping word tokens
+- Interpret similarity
+- Ensure reproducibility and scalability
 
-## 🗂️ Project Structure
-### 📁 root/
-### ── FindingSimilarItems.ipynb: Main implementation (Colab compatible)
-### ── requirements.txt: Required Python packages
-### ── tfidf_similar_pairs.csv
-### ── jaccard_vs_tfidf.csv
-### ── jaccard_vs_tfidf_plot.png
-### ── report.tex: LaTeX source of final report
-### ── README.md            # This file
+## 📊 Dataset
 
----
+- Source: [Amazon Books Reviews – Kaggle](https://www.kaggle.com/datasets/mohamedbakhet/amazon-books-reviews)
+- Preprocessing steps include:
+  - HTML entity cleaning
+  - Unicode normalization
+  - Duplicate removal
+  - Trimming reviews to ≤ 200 words
 
-## 🧪 Methods
+## ⚙️ Technologies Used
 
-### ✅ Jaccard Similarity
-- Based on the intersection-over-union of word tokens
-- Simple and efficient for detecting surface-level matches
+- Python 3.9
+- Libraries: `pandas`, `numpy`, `matplotlib`, `re`, `unicodedata`, `html`
+- Notebook: Jupyter (Google Colab compatible)
 
-### ✅ TF-IDF Cosine Similarity
-- Captures deeper semantic similarities
-- Uses `sklearn` to vectorize reviews and compute pairwise cosine distances
+## 📁 File Structure
 
----
-
-## ⚙️ Setup & Usage
-
-1. Clone this repository:
 ```bash
-git clone https://github.com/your-username/finding-similar-reviews.git
-cd finding-similar-reviews 
-``` 
-
-
-2. Upload your Kaggle API credentials as kaggle.json::
-```bash
-mkdir ~/.kaggle
-cp kaggle.json ~/.kaggle/
-chmod 600 ~/.kaggle/kaggle.json
-```
-
-## 📊 Results
-- Jaccard and TF-IDF return very different matches
-- IDF provides more semantically accurate results
-- jaccard_vs_tfidf_plot.png for a comparison scatter plot
-
-## 📝 Report
-- The full report is available in the `report.tex` file
-
-## 🧑‍💻 Author
-
-Hilal Mente
-Master in Data Science for Economics
-University of Milan – 2024/25
+.
+├── notebook.ipynb          # Main Jupyter Notebook (Colab-compatible)
+├── requirements.txt        # Required Python packages
+├── HilalMente_Report.pdf   # Final PDF report
+├── top_jaccard_pairs.csv   # Exported table of top 100 Jaccard review pairs
+├── distribution_of_review_lengths.png
+├── box_plot_of_review_lengths.png
+├── cumulative_distribution_of_review_lengths.png
+└── README.md
