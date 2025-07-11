@@ -1,48 +1,54 @@
-# 📚 Finding Similar Book Reviews using Jaccard Similarity
+# 🚀 Scalable Detection of Similar Book Reviews Using MinHash and Locality-Sensitive Hashing (LSH)
 
-This repository contains the code, report, and data processing workflow for the project:  
-**“Finding Similar Book Reviews using Jaccard Similarity”**  
-conducted as part of the course *Algorithms for Massive Data* in the Master in Data Science for Economics program at Università degli Studi di Milano.
+This repository contains the implementation of a scalable system for detecting similar book reviews in large datasets using **MinHash signatures** and **Locality-Sensitive Hashing (LSH)**. The system is designed to efficiently identify lexically similar texts without performing exhaustive pairwise comparisons.
 
-## 👩‍💻 Author
+## 📚 Dataset
 
-- Hilal Mente 
-- Academic Year 2024/25
+The dataset used is the **Amazon Books Review Dataset**, retrieved via the Kaggle API. Each review includes text content, rating, and metadata.
 
-## 🧠 Project Description
+## 🎯 Objective
 
-This project focuses on finding lexically similar book reviews using the **Jaccard Similarity** metric on a scalable subset of the Amazon Books Review dataset.  
-Key goals:
-- EDA of review length distribution
-- Preprocess large-scale review data
-- Detect pairs of reviews with overlapping word tokens
-- Interpret similarity
-- Ensure reproducibility and scalability
+To detect potentially redundant or near-duplicate reviews by approximating pairwise Jaccard similarity in a scalable manner.
 
-## 📊 Dataset
+---
 
-- Source: [Amazon Books Reviews – Kaggle](https://www.kaggle.com/datasets/mohamedbakhet/amazon-books-reviews)
-- Preprocessing steps include:
-  - HTML entity cleaning
-  - Unicode normalization
-  - Duplicate removal
-  - Trimming reviews to ≤ 200 words
+## 🔧 Methodology
 
-## ⚙️ Technologies Used
+1. **Text Cleaning & Preprocessing**:
+   - Lowercasing
+   - Removal of punctuation
+   - Optional filtering of short reviews
 
-- Python 3.9
-- Libraries: `pandas`, `numpy`, `matplotlib`, `re`, `unicodedata`, `html`
-- Notebook: Jupyter (Google Colab compatible)
+2. **Shingling**:
+   - Character-level shingling with `k=5` is used to convert each review into a set of substrings (shingles).
 
-## 📁 File Structure
+3. **MinHashing**:
+   - Each set of shingles is converted into a MinHash signature using multiple hash functions.
+   - Signatures reduce dimensionality while preserving similarity structure.
+
+4. **LSH Bucketing**:
+   - Signatures are divided into bands and hashed into buckets.
+   - Only review pairs falling into the same bucket in any band are considered candidate matches.
+
+5. **Jaccard Evaluation**:
+   - For a selected subset of LSH-detected pairs, the **true Jaccard similarity** is computed and compared to evaluate LSH accuracy.
+
+---
+
+## 📊 Results Summary
+
+- The system identified thousands of highly similar review pairs in under a minute, even for datasets with over 60,000 entries.
+- Manual and automatic evaluations showed that many detected pairs had a true Jaccard similarity > 0.98.
+- The system avoids expensive \( O(n^2) \) comparisons while maintaining high precision for near-duplicate review detection.
+
+---
+
+## 📂 Project Structure
 
 ```bash
-.
-├── notebook.ipynb          # Main Jupyter Notebook (Colab-compatible)
-├── requirements.txt        # Required Python packages
-├── HilalMente_Report.pdf   # Final PDF report
-├── top_jaccard_pairs.csv   # Exported table of top 100 Jaccard review pairs
-├── distribution_of_review_lengths.png
-├── box_plot_of_review_lengths.png
-├── cumulative_distribution_of_review_lengths.png
+├── data/
+│   └── amazon_books.csv                # Original dataset (not included)
+├── main_analysis.ipynb                 # Jupyter notebook with full pipeline
+├── evaluation_top5.csv                 # Sample evaluation of top-matched pairs
+├── report.pdf                          # Project report in LaTeX (if applicable)
 └── README.md
