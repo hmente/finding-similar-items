@@ -50,5 +50,5 @@ To detect potentially redundant or near-duplicate reviews by approximating pairw
 │   └── amazon_books.csv                # Original dataset (not included)
 ├── main_analysis.ipynb                 # Jupyter notebook with full pipeline
 ├── evaluation_top5.csv                 # Sample evaluation of top-matched pairs
-├── report.pdf                          # Project report in LaTeX (if applicable)
+├── report.pdf                          # Project report in LaTeX
 └── README.md
